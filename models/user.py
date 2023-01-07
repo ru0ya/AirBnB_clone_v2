@@ -20,7 +20,6 @@ class User(BaseModel, Base):
         reviews (sqlalchemy relationship): The User-Review relationship.
     """
     __tablename__ = "users"
-<<<<<<< HEAD
     if storage_type == 'db':
         email = Column(String(128), nullable=False)
         password = Column(String(128), nullable=False)
@@ -36,11 +35,3 @@ class User(BaseModel, Base):
         password = ""
         first_name = ""
         last_name = ""
-=======
-    email = Column(String(128), nullable=False)
-    password = Column(String(128), nullable=False)
-    first_name = Column(String(128))
-    last_name = Column(String(128))
-    places = relationship("Place", backref="user", cascade="delete")
-    reviews = relationship("Review", backref="user", cascade="delete")
->>>>>>> 0778974c353f927319c26f2301f32a2a98ee57c8
