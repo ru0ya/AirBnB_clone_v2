@@ -40,39 +40,36 @@ class HBNBCommand(cmd.Cmd):
         print("")
         return True
 
-    def do_create(self, line):
-        """Usage: create <class> <key 1>=<value 2> <key 2>=<value 2> ...
-        Create a new class instance with given keys/values and print its id.
+    def do_create(self, args):
         """
-        try:
-            if not line:
-                raise SyntaxError()
-            my_list = line.split(" ")
-
-            kwargs = {}
-            for i in range(1, len(my_list)):
-                key, value = tuple(my_list[i].split("="))
-                if value[0] == '"':
-                    value = value.strip('"').replace("_", " ")
-                else:
-                    try:
-                        value = eval(value)
-                    except (SyntaxError, NameError):
-                        continue
-                kwargs[key] = value
-
-            if kwargs == {}:
-                obj = eval(my_list[0])()
-            else:
-                obj = eval(my_list[0])(**kwargs)
-                storage.new(obj)
-            print(obj.id)
-            obj.save()
-
-        except SyntaxError:
+        Create an object of any class
+        """
+        if not args:
             print("** class name missing **")
-        except NameError:
+            return
+        elif arg not in HBNBCommand.classes:
             print("** class doesn't exist **")
+            return
+
+        args = shlex.split(arg)
+        class_name = args.pop(O)
+
+        new_instance = HBNBCommand.classes[class_name]()
+
+        for param in args:
+            key, value = param.split("=")
+            if value.startswith('"'):
+                value = value[1:-1]
+
+                value = value.replace("_", " ")
+
+                setattr(new_instance, key, value)
+            elif "." in value:
+                setattr(new_instance, key, float(value))
+            else:
+                setattr(new_instance, key, int(value))
+
+        storage.save()
 
     def do_show(self, line):
         """Prints the string representation of an instance
