@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Console Module """
 import cmd
+import sys
 from shlex import split
 from models import storage
 from datetime import datetime
@@ -16,16 +17,24 @@ from models.review import Review
 class HBNBCommand(cmd.Cmd):
     """Defines the HolbertonBnB command interpreter."""
 
-    prompt = "(hbnb) "
-    __classes = {
-        "BaseModel",
-        "User",
-        "State",
-        "City",
-        "Amenity",
-        "Place",
-        "Review"
+    prompt = "(hbnb) " if sys.__stdin__.isatty() else ""
+
+    classes = {
+            "BaseModel": BaseModel, 
+            "User": User,
+            "State": State,
+            "City": City,
+            "Amenity": Amenity,
+            "Place": Place,
+            "Review": Review
     }
+    
+    dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
+    types = {
+            "number_rooms" int, "number_bathrooms": int, 
+            "max_guest": int, "price_by_night": int,
+            "latitude": float, "longitude": float
+            }
 
     def emptyline(self):
         """Ignore empty spaces."""
