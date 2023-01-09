@@ -7,6 +7,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy import String
 from sqlalchemy.orm import relationship
 
+
 class Amenity(BaseModel, Base):
     """Represents an Amenity for a MySQL database.
     Inherits from SQLAlchemy Base and links to the MySQL table amenities.
@@ -19,7 +20,8 @@ class Amenity(BaseModel, Base):
     __tablename__ = "amenities"
     if (storage_type == "db"):
         name = Column(String(128), nullable=False)
-        place_amenities = relationship("Place", secondary="place_amenity", viewonly=False)
+        place_amenities = relationship("Place", secondary="place_amenity",
+                                        viewonly=False)
 
     else:
         name = ""

@@ -8,7 +8,6 @@ from sqlalchemy import String
 from sqlalchemy.orm import relationship
 
 
-
 class City(BaseModel):
     """ The city class, contains state ID and name """
     __tablename__ = "cities"
@@ -20,6 +19,7 @@ class City(BaseModel):
     else:
         state_id = ""
         name = ""
+
 
 class City(BaseModel, Base):
     """Represents a city for a MySQL database.
