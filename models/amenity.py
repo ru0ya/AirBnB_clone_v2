@@ -2,7 +2,6 @@
 """ State Module for HBNB project """
 from models.base_model import Base, BaseModel
 from sqlalchemy import Column, String
-from models import storage_type
 
 
 class Amenity(BaseModel, Base):
@@ -15,6 +14,7 @@ class Amenity(BaseModel, Base):
       """
 
     __tablename__ = "amenities"
+    from models import storage_type
     if (storage_type == "db"):
         name = Column(String(128), nullable=False)
 
