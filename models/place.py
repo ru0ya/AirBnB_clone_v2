@@ -12,12 +12,13 @@ from os import environ
 import models
 
 place_amenity = Table("place_amenity", Base.metadata,
-        Column("place_id", String(60), 
-            ForeignKey("places.id"), 
-            primary_key=True, nullable=False),
-        Column("amenity_id", String(60),
-            ForeignKey("amenities.id"),
-            primary_key=True, nullable=False))
+                      Column("place_id", String(60),
+                             ForeignKey("places.id"),
+                             primary_key=True, nullable=False),
+                      Column("amenity_id", String(60),
+                             ForeignKey("amenities.id"),
+                             primary_key=True, nullable=False))
+
 
 class Place(BaseModel, Base):
     """
@@ -41,7 +42,7 @@ class Place(BaseModel, Base):
     if environ['HBNB_TYPE_STORAGE'] == 'db':
         reviews = relationship("Review", back_populates="place")
         amenities = relationship("Amenity",
-                                secondary=place_amenity,
+                                 secondary=place_amenity,
                                  back_populates="place_amenities",
                                  viewonly=False)
     else:
