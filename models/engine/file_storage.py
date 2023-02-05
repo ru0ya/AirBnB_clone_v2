@@ -54,19 +54,17 @@ class FileStorage:
                 temp = json.load(f)
                 for key, val in temp.items():
                     self.all()[key] = classes[val['__class__']](**val)
-        except FileNotFoundError:
-            pass
+    except FileNotFoundError:
+        pass
 
     def delete(self, obj=None):
         """Deletes a given object from __objects if it exists"""
         try:
-            # create object key using classname and object id
+            """create object key using classname and object id"""
             obj_key = f"{type(obj).__name__}.{obj.id}"
-
-            # removing instances from objs dictionary passing to the obj_key
+#            removing instances from objs dictionary passing to the obj_key
             del self.__objects[obj_key]
-
-            # saving the updated object
+#            saving the updated object
             FileStorage.save()
         except Exception:
             pass
