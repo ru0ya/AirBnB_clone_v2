@@ -19,12 +19,12 @@ def hbnb():
 
 @app.route('/c/<text>', strict_slashes=False)
 def c_text(text):
-    return ("C" + escape(text.replace('_', ' ')))
+    return ("C".format(text.replace('_', ' ')))
 
 
 @app.route('/python/(<text>)', strict_slashes=False)
 def pyth_text(text="is cool"):
-    return ("Python" + escape(text.replace('_', ' ')))
+    return ("Python".format(text.replace('_', ' ')))
 
 
 @app.route('/number/<n>', strict_slashes=False)
