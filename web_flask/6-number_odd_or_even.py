@@ -22,7 +22,7 @@ def c_text(text):
     return ("C".format(text.replace('_', ' ')))
 
 
-@app.route('/python/(<text>)', strict_slashes=False)
+@app.route('/python/<text>', strict_slashes=False)
 def pyth_text(text="is cool"):
     return ("Python".format(text.replace('_', ' ')))
 
@@ -42,7 +42,8 @@ def dis_number(n):
 @app.route('/number_odd_or_even/<n>', strict_slashes=False)
 def odd_or_even(n):
     if n.isdigit():
-        return (render_template('6-number_odd_or_even.html', number=n))
+        n = int(n)
+        return (render_template('6-number_odd_or_even.html', n=n))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

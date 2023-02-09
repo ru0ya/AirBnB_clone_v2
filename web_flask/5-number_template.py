@@ -22,7 +22,7 @@ def c_text(text):
     return ("C".format(text.replace('_', ' ')))
 
 
-@app.route('/python/(<text>)', strict_slashes=False)
+@app.route('/python/<text>', strict_slashes=False)
 def pyth_text(text="is cool"):
     return ("Python".format(text.replace('_', ' ')))
 
@@ -36,7 +36,7 @@ def number(n):
 @app.route('/number_template/<n>', strict_slashes=False)
 def dis_number(n):
     if n.isdigit():
-        return (render_template('5-number.html', number=n))
+        return render_template('5-number.html', n=n)
 
 
 if __name__ == '__main__':
