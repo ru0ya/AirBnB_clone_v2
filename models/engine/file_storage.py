@@ -15,10 +15,11 @@ class FileStorage:
         else:
             # create empty dict to store classes
             cls_dict = {}
-            for key, value in FileStorage.__objects.items():
+            for key,value in FileStorage.__objects.items():
                 if type(value) is cls:
                     cls_dict[key] = value
             return cls_dict
+
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -53,24 +54,18 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                    self.all()[key] = classes[val['__class__']](**val)
-    except FileNotFoundError:
-        pass
-
-    def close(self):
-        """calls reload method for deserializing
-        the JSON file to objects
-        """
-        self.reload()
+                        self.all()[key] = classes[val['__class__']](**val)
+        except FileNotFoundError:
+            pass
 
     def delete(self, obj=None):
         """Deletes a given object from __objects if it exists"""
         try:
-            """create object key using classname and object id"""
+            #create object key using classname and object id
             obj_key = f"{type(obj).__name__}.{obj.id}"
-#            removing instances from objs dictionary passing to the obj_key
+            #removing instances from objs dictionary passing to the obj_key
             del self.__objects[obj_key]
-#            saving the updated object
+            #saving the updated object
             FileStorage.save()
         except Exception:
             pass

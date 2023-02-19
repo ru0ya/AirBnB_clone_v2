@@ -40,7 +40,7 @@ class DBStorage:
                                       pool_pre_ping=True)
         # drop tables if test environment
         if getenv('HBNB_ENV') == 'test':
-            Base.metadata.drop_all(self.__engine)
+                Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """Query and return all objects by class/generally
@@ -91,7 +91,3 @@ class DBStorage:
                                expire_on_commit=False)
         Session = scoped_session(session)
         self.__session = Session()
-
-    def close(self):
-        """method that closses the session"""
-        self.__session.remove()
